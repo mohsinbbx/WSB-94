@@ -24,6 +24,36 @@ app.get('/pdf',(req,res) => {
     res.sendFile(`${htmlPath}/file-sample_150kB.pdf`);
 })
 
+
+
+
+app.get('/index',(req,res) => {
+    res.sendFile(`${htmlPath}/index.html`);
+})
+
+app.get('/aboutus',(req,res) => {
+    res.sendFile(`${htmlPath}/aboutus.html`);
+})
+
+app.get('/courses',(req,res) => {
+    res.sendFile(`${htmlPath}/courses.html`);
+})
+
+app.get('/gallery',(req,res) => {
+    res.sendFile(`${htmlPath}/gallery.html`);
+})
+
+app.get('/enquiry',(req,res) => {
+    res.sendFile(`${htmlPath}/enquiry.html`);
+})
+
+app.get('/contactus',(req,res) => {
+    res.sendFile(`${htmlPath}/contactus.html`);
+})
+
+
+
+
 app.get('/*', (req,res) => {
     res.sendFile(`${htmlPath}/404.html`);
 })
