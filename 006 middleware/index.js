@@ -2,14 +2,36 @@ const express = require('express');
 
 const app = express();
 
-const checkToken = (req,res,next)=>{
-    console.log('object');
+const token = 'e5432';
 
-    next();
+const checkToken = (req,res,next)=>{
+    const userToken = req.params.val;
+    console.log(userToken);
+
+    if(!userToken)
+     {
+        res.status(400).json({msg:'Please Add Token🙏'});
+     }
+     else if(userToken !== token){
+        res.status(401).json({msg:'Invalid Token❌'});
+     }
+     else {
+        next();
+     }
 };
 
-app.get('/user', checkToken, (req,res)=>{
-    res.send('data fatched successfully !!');
+app.use(checkToken);
+
+app.get('/user/:val?', (req,res)=>{
+    res.status(200).json({msg:'Api Fatched Successfully✅'});
+})
+
+app.get('/admin/:val?', (req,res)=>{
+    res.status(200).json({msg:'Api Fatched Successfully✅'});
+})
+
+app.get('/client/:val?', (req,res)=>{
+    res.status(200).json({msg:'Api Fatched Successfully✅'});
 })
 
 app.listen(5500,()=>{
