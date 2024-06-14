@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
-const { type } = require('os');
-const { boolean } = require('webidl-conversions');
 
 const productSchema = new mongoose.Schema({
     name:{
-        type:string,
+        type:String,
         required:true
     },
-    destination:{
-        type:string,
+    description:{
+        type:String,
         required:true
     },
     price:{
@@ -20,20 +18,20 @@ const productSchema = new mongoose.Schema({
         required:true
     },
     thumbnail:{
-        type:string,
+        type:String,
         required:true
     },
     images:{
-        type:Object,
+        type:Array,
         required:true
     },
     status:{
-        type:boolean,
+        type:Boolean,
         default:true
     },
     created_at:{
-        type:Object,
-        default: Date()
+        type:Date,
+        default: Date.now
     },
     updated_at:{
         type:Object
