@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { mainContext } from '../Context';
 import Header from '../Common/Header';
 import Sidebar from '../Common/Sidebar';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router';
 function Addslider() {
   const nav = useNavigate();
   let { changemenu } = useContext(mainContext);
+  const [imgPrev,setImgPrev] = useState('');
 
   const handleAddSlider = async (e) => {
     e.preventDefault();
@@ -32,6 +33,22 @@ function Addslider() {
     }
   };
 
+  const handleImgPrev = (e) => {
+    const reader = new FileReader();
+
+    console.log(reader);
+
+    const file = e.target.files[0];
+
+    if(file){
+      reader.readAsDataURL(file);
+    }
+
+    reader.onload = ()=>{
+      setImgPrev(reader.result);
+    }
+  }
+
   return (
     <div>
 
@@ -52,19 +69,19 @@ function Addslider() {
                 <input type="text" name='sliderheading' className='border border-gray-400 px-4 w-full h-[50px] mb-3 mt-2 ' />
                 Slider Sub-Heading
                 <input type="text" name='slidersubheading' className='border border-gray-400 w-full h-[50px] mb-3 mt-2 px-4 ' />
+                Slider Description
+                <textarea name="sliderdes" id="" className='border px-4 pt-3 border-gray-400 my-2 w-full h-[100px]' cols="30" rows="10"></textarea>
                 Slider Image
-                <input type="file" name='thumbnail' id='file-input' className='border hidden border-gray-400 w-full h-[50px] mb-3 mt-2 ' />
-                <div className='flex items-center gap-0 mt-[80px]'>
+                <input type="file" onChange={handleImgPrev} name='thumbnail' id='file-input' className='border hidden border-gray-400 w-full h-[50px] mt-2 ' />
+                <div className='flex items-center gap-0 mt-[10px]'>
                   <div className='w-full flex items-center'>
                     <input type="text" readOnly placeholder='Upload File' className=' px-4 rounded-[10px_0px_0px_10px] border border-gray-400 w-[70%] h-[50px]' />
                     <label id="file-input-label" for="file-input" className='border block  bg-[#4B49AC] text-white text-center leading-[50px]  w-[10%] rounded-[0px_20px_20px_0px] h-[50px]  '>Upload</label>
                   </div>
                   <div className=''>
-                    <img src={prev} alt="" width={150} />
+                    <img src={imgPrev || prev} alt="" width={150} />
                   </div>
                 </div>
-                Slider Description
-                <textarea name="sliderdes" id="" className='border px-4 pt-3 border-gray-400 my-2 w-full h-[100px]' cols="30" rows="10"></textarea>
                 Slider Status
                 <div className='flex items-center mt-5  mb-8 gap-2'>
                   <input type="radio" value={true} name='status' className='mx-2 w-[20px] h-[20px] text-[20px]' /> Active

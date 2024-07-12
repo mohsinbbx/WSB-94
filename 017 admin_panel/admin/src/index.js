@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element:<Dashboard/>
   },
   {
-    path:"addcourse",
+    path:"addcourse/:_id?",
     element:<Addcourse/>
   },
   {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     element:<Addslider/>
   },
   {
-    path:"addvideo",
+    path:"addvideo/:_id?",
     element:<Addvideo/>
   },
   {
